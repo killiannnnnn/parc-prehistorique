@@ -2,7 +2,6 @@ package net.ent.etnc.parc_prehistorique.models.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PastOrPresent;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -41,7 +40,6 @@ public class Operation extends AbstractPersistableWithIdSetter<Long> {
     @Getter
     @Setter
     @NotNull
-    @PastOrPresent
     @Column(name = "debut", nullable = false)
     private LocalDateTime debut;
 
@@ -52,16 +50,20 @@ public class Operation extends AbstractPersistableWithIdSetter<Long> {
     private LocalDateTime fin;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "animal_id", nullable = true)
-    private Animal animal;
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "zone_depart_id")
     private Zone zoneDepart;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "zone_arrivee_id")
     private Zone zoneArrivee;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "operations_animaux",
+            joinColumns = @JoinColumn(name = "operation_id"),
+            inverseJoinColumns = @JoinColumn(name = "animaux_id")
+    )
+    private Set<Animal> animaux = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -75,6 +77,18 @@ public class Operation extends AbstractPersistableWithIdSetter<Long> {
     @Setter
     @Column(name = "notes", nullable = true, length = 100)
     private String notes;
+
+    public Set<Animal> getAnimaux() {
+        return Collections.unmodifiableSet(animaux);
+    }
+
+    public void addAnimal(Animal animal) {
+        animaux.add(animal);
+    }
+
+    public void removeAnimal(Animal animal) {
+        animaux.remove(animal);
+    }
 
     public Set<Personnel> getPersonnels() {
         return Collections.unmodifiableSet(personnels);
