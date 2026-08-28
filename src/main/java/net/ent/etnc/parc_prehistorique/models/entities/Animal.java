@@ -13,7 +13,7 @@ import net.ent.etnc.parc_prehistorique.models.enums.RegimeAlimentaire;
 import net.ent.etnc.parc_prehistorique.models.enums.Sante;
 import net.ent.etnc.parc_prehistorique.models.enums.Sexe;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(
@@ -75,12 +75,12 @@ public class Animal extends AbstractPersistableWithIdSetter<Long> {
     @NotNull
     @PastOrPresent
     @Column(name = "date_naissance", nullable = false)
-    private LocalDate dateNaissance;
+    private LocalDateTime dateNaissance;
 
     @Getter
     @Setter
     @PastOrPresent
     @Column(name = "date_deces", nullable = true)
-    private LocalDate dateDeces; // VERIFIER SI IL EST VIVANT POUR FAIRE DES OPERATIONS ETC
+    private LocalDateTime dateDeces; // VERIFIER SI IL EST VIVANT POUR FAIRE DES OPERATIONS ETC
 
 }

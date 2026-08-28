@@ -50,8 +50,8 @@ public class Operation extends AbstractPersistableWithIdSetter<Long> {
     private LocalDateTime fin;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "zone_depart_id")
-    private Zone zoneDepart;
+    @JoinColumn(name = "zone_initiale_id")
+    private Zone zoneInitiale;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "zone_arrivee_id")

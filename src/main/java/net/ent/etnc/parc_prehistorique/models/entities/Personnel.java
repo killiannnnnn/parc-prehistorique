@@ -10,9 +10,9 @@ import lombok.ToString;
 import net.ent.etnc.parc_prehistorique.models.commons.AbstractPersistableWithIdSetter;
 import net.ent.etnc.parc_prehistorique.models.enums.Habilitation;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(
@@ -47,10 +47,10 @@ public class Personnel extends AbstractPersistableWithIdSetter<Long> {
             joinColumns = @JoinColumn(name = "personnel_id"),
             inverseJoinColumns = @JoinColumn(name = "espece_id")
     )
-    private List<Espece> especes = new ArrayList<>();
+    private Set<Espece> especes = new HashSet<>();
 
-    public List<Espece> getEspeces() {
-        return Collections.unmodifiableList(especes);
+    public Set<Espece> getEspeces() {
+        return Collections.unmodifiableSet(especes);
     }
 
     public void addEspece(Espece espece) {

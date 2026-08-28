@@ -17,7 +17,7 @@ import net.ent.etnc.parc_prehistorique.models.enums.TypeEnclo;
 @Table(
         name = "zones"
 )
-@ToString(of = {"nom", "enclo", "capaciteMax", "etat", "description"}, callSuper = true)
+@ToString(of = {"nom", "typeEnclo", "capaciteMax", "etatEnclo", "description"}, callSuper = true)
 @EqualsAndHashCode(callSuper = false)
 public class Zone extends AbstractPersistableWithIdSetter<Long> {
 
@@ -31,8 +31,8 @@ public class Zone extends AbstractPersistableWithIdSetter<Long> {
     @Setter
     @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "enclo", nullable = false)
-    private TypeEnclo enclo;
+    @Column(name = "type_enclo", nullable = false)
+    private TypeEnclo typeEnclo;
 
     @Getter
     @Setter
@@ -46,8 +46,8 @@ public class Zone extends AbstractPersistableWithIdSetter<Long> {
     @Setter
     @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "etat", nullable = false)
-    private EtatEnclo etat;
+    @Column(name = "etat_enclo", nullable = false)
+    private EtatEnclo etatEnclo;
 
     @Getter
     @Setter
