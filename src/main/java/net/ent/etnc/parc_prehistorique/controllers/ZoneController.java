@@ -64,8 +64,8 @@ public class ZoneController {
             if (ZoneDto == null || ZoneDto.getId() != null) {
                 return ResponseEntity.badRequest().build();
             }
-            Zone Zone = zoneService.create(this.zoneAssembler.toEntity(ZoneDto));
-            return ResponseEntity.status(HttpStatus.CREATED).body(this.zoneAssembler.toDto(Zone));
+            Zone Zone = zoneService.create(zoneAssembler.toEntity(ZoneDto));
+            return ResponseEntity.status(HttpStatus.CREATED).body(zoneAssembler.toDto(Zone));
         } catch (Exception e) {
             return ResponseEntity.internalServerError().build();
         }
@@ -80,8 +80,7 @@ public class ZoneController {
             if (!zoneService.existsById(id)) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
-            Zone = zoneService.update(Zone);
-            return ResponseEntity.ok(Zone);
+            return ResponseEntity.ok(zoneService.update(Zone));
         } catch (Exception e) {
             return ResponseEntity.internalServerError().build();
         }
