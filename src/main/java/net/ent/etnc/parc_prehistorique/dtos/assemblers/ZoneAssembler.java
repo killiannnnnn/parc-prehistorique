@@ -6,18 +6,33 @@ import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class ZoneAssembler {
     public ZoneDto toDto(Zone zone) {
-        return null;
+        return ZoneDto.builder()
+                .id(zone.getId())
+                .nom(zone.getNom())
+                .enclo(zone.getEnclo())
+                .capaciteMax(zone.getCapaciteMax())
+                .etat(zone.getEtat())
+                .description(zone.getDescription())
+                .build();
     }
 
     public Zone toEntity(ZoneDto zoneDto) {
-        return null;
+        Zone zone = new Zone();
+        zone.setId(zoneDto.getId());
+        zone.setNom(zoneDto.getNom());
+        zone.setEnclo(zoneDto.getEnclo());
+        zone.setCapaciteMax(zoneDto.getCapaciteMax());
+        zone.setEtat(zoneDto.getEtat());
+        zone.setDescription(zoneDto.getDescription());
+        return zone;
     }
 
     public Collection<ZoneDto> toDtos(List<Zone> content) {
-        return null;
+        return content.stream().map(this::toDto).collect(Collectors.toSet());
     }
 }
