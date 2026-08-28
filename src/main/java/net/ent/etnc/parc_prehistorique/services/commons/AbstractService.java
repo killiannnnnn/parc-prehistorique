@@ -1,7 +1,7 @@
 package net.ent.etnc.parc_prehistorique.services.commons;
 
-import net.ent.etnc.firstback.models.commons.AbstractPersistableWithIdSetter;
-import net.ent.etnc.firstback.repositories.commons.BaseRepository;
+import net.ent.etnc.parc_prehistorique.models.commons.AbstractPersistableWithIdSetter;
+import net.ent.etnc.parc_prehistorique.repositories.common.BaseRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
