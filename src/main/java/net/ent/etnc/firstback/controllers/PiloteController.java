@@ -5,12 +5,17 @@ import net.ent.etnc.firstback.dtos.assemblers.PiloteAssembler;
 import net.ent.etnc.firstback.models.Pilote;
 import net.ent.etnc.firstback.services.PiloteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/pilotes")
@@ -26,11 +31,12 @@ public class PiloteController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<Collection<PiloteDto>> findAll(
+    public ResponseEntity<Page<PiloteDto>> findAll(
             @RequestParam(required = false) Long aviondId) {
         try {
             if (aviondId == null) {
-                return ResponseEntity.ok(this.piloteAssembler.toDtos(piloteService.findAll(Pageable.unpaged()).getContent()));
+                Pageable pageable = PageRequest.of(0, 10);
+                return ResponseEntity.ok(piloteService.findAll(pageable).map(piloteAssembler::toDto));
             }
 
             List<Pilote> pilotes = piloteService.findByAvionId(aviondId);
