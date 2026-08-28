@@ -60,7 +60,31 @@ public class Init implements CommandLineRunner {
         avion3.setActif(true);
         avion3.setMisEnService(LocalDate.now().minusMonths(10));
 
-        Arrays.asList(avion1, avion2, avion3).forEach(avionService::create);
+        Avion avion4 = new Avion();
+        avion4.setPilotes(Collections.singletonList(pilotes.get(3)));
+        avion4.setImmat("DD-333");
+        avion4.setEnvergure(25);
+        avion4.setPuissance(1200);
+        avion4.setActif(true);
+        avion4.setMisEnService(LocalDate.now().minusMonths(5));
+
+        Avion avion5 = new Avion();
+        avion5.setPilotes(Collections.singletonList(pilotes.get(4)));
+        avion5.setImmat("EE-666");
+        avion5.setEnvergure(10);
+        avion5.setPuissance(10_000);
+        avion5.setActif(true);
+        avion5.setMisEnService(LocalDate.now().minusMonths(5));
+
+        Avion avion6 = new Avion();
+        avion6.setPilotes(Collections.singletonList(pilotes.get(5)));
+        avion6.setImmat("FF-333");
+        avion6.setEnvergure(25);
+        avion6.setPuissance(1200);
+        avion6.setActif(true);
+        avion6.setMisEnService(LocalDate.now().minusMonths(5));
+
+        Arrays.asList(avion1, avion2, avion3, avion4, avion5, avion6).forEach(avionService::create);
 
     }
 
@@ -85,7 +109,25 @@ public class Init implements CommandLineRunner {
         pilote3.setPrenom("Prenom3");
         pilote3.setGrade("Grade3");
         pilote3.setDateNaissance(LocalDate.now().minusYears(20));
+        Pilote pilote4 = new Pilote();
+        pilote4.setNid("9999999999");
+        pilote4.setNom("Nom4");
+        pilote4.setPrenom("Prenom4");
+        pilote4.setGrade("Grade4");
+        pilote4.setDateNaissance(LocalDate.now().minusYears(30));
+        Pilote pilote5 = new Pilote();
+        pilote5.setNid("1111111111");
+        pilote5.setNom("Nom5");
+        pilote5.setPrenom("Prenom5");
+        pilote5.setGrade("Grade5");
+        pilote5.setDateNaissance(LocalDate.now().minusYears(30));
+        Pilote pilote6 = new Pilote();
+        pilote6.setNid("2222222222");
+        pilote6.setNom("Nom6");
+        pilote6.setPrenom("Prenom6");
+        pilote6.setGrade("Grade6");
+        pilote6.setDateNaissance(LocalDate.now().minusYears(30));
 
-        Arrays.asList(pilote1, pilote2, pilote3).forEach(piloteService::create);
+        Arrays.asList(pilote1, pilote2, pilote3, pilote4, pilote5, pilote6).forEach(piloteService::create);
     }
 }

@@ -1,8 +1,8 @@
 spring:
   application:
-    name: first-back
+    name: parc-prehistorique
   datasource:
-    url: jdbc:postgresql://localhost:5432/first_back
+    url: jdbc:postgresql://localhost:5432/parc_prehistorique
     username: postgres
     password: azerty+35
     driver-class-name: org.postgresql.Driver

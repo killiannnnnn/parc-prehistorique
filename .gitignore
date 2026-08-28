@@ -1,4 +1,4 @@
-HELP.md
+RULES.md
 target/
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Projet ###
+/src/main/java/net/ent/etnc/firstback

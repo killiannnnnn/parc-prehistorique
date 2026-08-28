@@ -26,7 +26,8 @@ public class PiloteController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<Collection<PiloteDto>> findAll(@RequestParam(required = false) Long aviondId) {
+    public ResponseEntity<Collection<PiloteDto>> findAll(
+            @RequestParam(required = false) Long aviondId) {
         try {
             if (aviondId == null) {
                 return ResponseEntity.ok(this.piloteAssembler.toDtos(piloteService.findAll(Pageable.unpaged()).getContent()));
