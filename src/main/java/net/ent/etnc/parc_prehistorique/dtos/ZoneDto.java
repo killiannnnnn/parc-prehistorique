@@ -13,9 +13,9 @@ public class ZoneDto {
     // request + response DTO
     private Long id;
     private String nom;
-    private TypeEnclo enclo;
+    private TypeEnclo typeEnclo;
     private int capaciteMax;
-    private EtatEnclo etat;
+    private EtatEnclo etatEnclo;
     private String description;
 
 }
