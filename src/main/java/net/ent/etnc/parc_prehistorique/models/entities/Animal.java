@@ -1,7 +1,6 @@
 package net.ent.etnc.parc_prehistorique.models.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
@@ -20,9 +19,16 @@ import java.time.LocalDate;
 @Table(
         name = "animaux"
 )
-@ToString(of = {"nom", "espece", "zone", "sante", "sexe", "regimeAlimentaire", "dateNaissance", "dateDeces"}, callSuper = true)
-@EqualsAndHashCode(of = "", callSuper = false)
-public class Animal extends AbstractPersistableWithIdSetter {
+@ToString(of = {
+        "nom",
+        "sante",
+        "sexe",
+        "regimeAlimentaire",
+        "dateNaissance",
+        "dateDeces"
+}, callSuper = true)
+@EqualsAndHashCode(callSuper = false)
+public class Animal extends AbstractPersistableWithIdSetter<Long> {
 
     @Getter
     @Setter
@@ -39,7 +45,6 @@ public class Animal extends AbstractPersistableWithIdSetter {
 
     @Getter
     @Setter
-    @Valid
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "zone_id", nullable = true, foreignKey = @ForeignKey(name = "fk__animal__zone"))
     private Zone zone; // VERIFIE COMPATIBILITE AVEC LA ZONE

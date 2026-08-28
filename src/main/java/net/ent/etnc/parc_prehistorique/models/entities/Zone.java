@@ -2,7 +2,7 @@ package net.ent.etnc.parc_prehistorique.models.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.EqualsAndHashCode;
@@ -10,8 +10,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import net.ent.etnc.parc_prehistorique.models.commons.AbstractPersistableWithIdSetter;
-import net.ent.etnc.parc_prehistorique.models.enums.Enclo;
 import net.ent.etnc.parc_prehistorique.models.enums.EtatEnclo;
+import net.ent.etnc.parc_prehistorique.models.enums.TypeEnclo;
 
 @Entity
 @Table(
@@ -23,7 +23,7 @@ public class Zone extends AbstractPersistableWithIdSetter<Long> {
 
     @Getter
     @Setter
-    @NotEmpty
+    @NotBlank
     @Column(name = "nom", nullable = false, length = 50)
     private String nom;
 
@@ -31,8 +31,8 @@ public class Zone extends AbstractPersistableWithIdSetter<Long> {
     @Setter
     @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "enclo", nullable = false, length = 50)
-    private Enclo enclo;
+    @Column(name = "enclo", nullable = false)
+    private TypeEnclo enclo;
 
     @Getter
     @Setter
@@ -40,18 +40,18 @@ public class Zone extends AbstractPersistableWithIdSetter<Long> {
     @Positive
     @Max(20)
     @Column(name = "capacite_max", nullable = false)
-    private int capaciteMax;
+    private Integer capaciteMax;
 
     @Getter
     @Setter
     @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "etat", nullable = false, length = 50)
+    @Column(name = "etat", nullable = false)
     private EtatEnclo etat;
 
     @Getter
     @Setter
-    @NotEmpty
+    @NotBlank
     @Column(name = "description", nullable = false, length = 50)
     private String description;
 
