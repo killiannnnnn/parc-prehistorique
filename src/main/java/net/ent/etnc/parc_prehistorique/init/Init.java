@@ -5,6 +5,7 @@ import net.ent.etnc.parc_prehistorique.models.enums.*;
 import net.ent.etnc.parc_prehistorique.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -31,6 +32,7 @@ public class Init implements CommandLineRunner {
         this.operationService = operationService;
     }
 
+    @Transactional
     @Override
     public void run(String... args) throws Exception {
         this.chargeZones();
@@ -108,7 +110,7 @@ public class Init implements CommandLineRunner {
         triceratops.setNom("Triceratops");
         triceratops.setTypeEspece(TypeEspece.TERRESTRE);
         triceratops.setDangerosite(Dangerosite.MODERE);
-        triceratops.setDescription("Herbivore à trois cornes du Crétacé");
+        triceratops.setDescription("Herbivore à trois cornes");
         triceratops.setHabilitationMinimale(Habilitation.CONFIRME);
         triceratops.addZone(zoneBeta);
 
@@ -116,7 +118,7 @@ public class Init implements CommandLineRunner {
         brachiosaurus.setNom("Brachiosaurus");
         brachiosaurus.setTypeEspece(TypeEspece.TERRESTRE);
         brachiosaurus.setDangerosite(Dangerosite.FAIBLE);
-        brachiosaurus.setDescription("Grand herbivore au long cou du Jurassique");
+        brachiosaurus.setDescription("Grand herbivore au long cou");
         brachiosaurus.setHabilitationMinimale(Habilitation.JUNIOR);
         brachiosaurus.addZone(zoneBeta);
 
@@ -169,7 +171,7 @@ public class Init implements CommandLineRunner {
         Personnel henry = new Personnel();
         henry.setPrenom("Henry");
         henry.setNom("Wu");
-        henry.setHabilitation(Habilitation.EXPERT);
+        henry.setHabilitation(Habilitation.CONFIRME);
         henry.addEspece(tRex);
         henry.addEspece(velociraptor);
         henry.addEspece(triceratops);
