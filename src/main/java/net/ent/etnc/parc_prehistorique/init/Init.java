@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Random;
 
 @Component
 public class Init implements CommandLineRunner {
@@ -39,9 +40,6 @@ public class Init implements CommandLineRunner {
         this.chargeOperations();
     }
 
-    // -------------------------------------------------------------------------
-    // ZONES
-    // -------------------------------------------------------------------------
     private void chargeZones() {
         if (zoneService.count() != 0) return;
 
@@ -73,21 +71,21 @@ public class Init implements CommandLineRunner {
         zone4.setEtatEnclo(EtatEnclo.ACTIF);
         zone4.setDescription("Enclos isolé pour espèces dangereuses");
 
+        zone1.setMatricule(generateMatricule());
+        zone2.setMatricule(generateMatricule());
+        zone3.setMatricule(generateMatricule());
+        zone4.setMatricule(generateMatricule());
+
         List.of(zone1, zone2, zone3, zone4).forEach(zoneService::create);
     }
 
-    // -------------------------------------------------------------------------
-    // ESPECES
-    // -------------------------------------------------------------------------
     private void chargeEspeces() {
         if (especeService.count() != 0) return;
 
-        // Récupération des zones déjà persistées
         Zone zoneAlpha = zoneService.findByNom("Sector Alpha");
         Zone zoneBeta = zoneService.findByNom("Sector Beta");
         Zone zoneDelta = zoneService.findByNom("Sector Delta");
 
-        // --- Tyrannosaurus Rex ---
         Espece tRex = new Espece();
         tRex.setNom("Tyrannosaurus Rex");
         tRex.setTypeEspece(TypeEspece.TERRESTRE);
@@ -97,7 +95,6 @@ public class Init implements CommandLineRunner {
         tRex.addZone(zoneAlpha);
         tRex.addZone(zoneDelta);
 
-        // --- Velociraptor ---
         Espece velociraptor = new Espece();
         velociraptor.setNom("Velociraptor");
         velociraptor.setTypeEspece(TypeEspece.TERRESTRE);
@@ -107,7 +104,6 @@ public class Init implements CommandLineRunner {
         velociraptor.addZone(zoneAlpha);
         velociraptor.addZone(zoneDelta);
 
-        // --- Triceratops ---
         Espece triceratops = new Espece();
         triceratops.setNom("Triceratops");
         triceratops.setTypeEspece(TypeEspece.TERRESTRE);
@@ -116,7 +112,6 @@ public class Init implements CommandLineRunner {
         triceratops.setHabilitationMinimale(Habilitation.CONFIRME);
         triceratops.addZone(zoneBeta);
 
-        // --- Brachiosaurus ---
         Espece brachiosaurus = new Espece();
         brachiosaurus.setNom("Brachiosaurus");
         brachiosaurus.setTypeEspece(TypeEspece.TERRESTRE);
@@ -125,21 +120,27 @@ public class Init implements CommandLineRunner {
         brachiosaurus.setHabilitationMinimale(Habilitation.JUNIOR);
         brachiosaurus.addZone(zoneBeta);
 
-        // Incompatibilités : les carnivores sont incompatibles avec les herbivores
+        tRex.setMatricule(generateMatricule());
+        velociraptor.setMatricule(generateMatricule());
+        triceratops.setMatricule(generateMatricule());
+        brachiosaurus.setMatricule(generateMatricule());
+
+        // 1. Sauvegarder TOUTES les espèces sans incompatibilités
+        List.of(tRex, velociraptor, triceratops, brachiosaurus).forEach(especeService::create);
+
+        // 2. Ajouter les incompatibilités APRÈS que tout est persisté
         tRex.addEspece(triceratops);
         tRex.addEspece(brachiosaurus);
+        tRex.addEspece(velociraptor);
+
         velociraptor.addEspece(triceratops);
         velociraptor.addEspece(brachiosaurus);
-        // T-Rex et Velociraptor sont aussi incompatibles entre eux
-        tRex.addEspece(velociraptor);
         velociraptor.addEspece(tRex);
 
-        List.of(tRex, velociraptor, triceratops, brachiosaurus).forEach(especeService::create);
+
+        List.of(tRex, velociraptor).forEach(especeService::update);
     }
 
-    // -------------------------------------------------------------------------
-    // PERSONNELS
-    // -------------------------------------------------------------------------
     private void chargePersonnels() {
         if (personnelService.count() != 0) return;
 
@@ -181,12 +182,14 @@ public class Init implements CommandLineRunner {
         tim.setHabilitation(Habilitation.JUNIOR);
         tim.addEspece(brachiosaurus);
 
+        alan.setMatricule(generateMatricule());
+        ellie.setMatricule(generateMatricule());
+        henry.setMatricule(generateMatricule());
+        tim.setMatricule(generateMatricule());
+
         List.of(alan, ellie, henry, tim).forEach(personnelService::create);
     }
 
-    // -------------------------------------------------------------------------
-    // ANIMAUX
-    // -------------------------------------------------------------------------
     private void chargeAnimaux() {
         if (animalService.count() != 0) return;
 
@@ -257,12 +260,16 @@ public class Init implements CommandLineRunner {
         brachi.setRegimeAlimentaire(RegimeAlimentaire.HERBIVORE);
         brachi.setDateNaissance(LocalDateTime.of(2017, 1, 5, 12, 0));
 
+        rex.setMatricule(generateMatricule());
+        raptor1.setMatricule(generateMatricule());
+        raptor2.setMatricule(generateMatricule());
+        raptor3.setMatricule(generateMatricule());
+        trike.setMatricule(generateMatricule());
+        brachi.setMatricule(generateMatricule());
+
         List.of(rex, raptor1, raptor2, raptor3, trike, brachi).forEach(animalService::create);
     }
 
-    // -------------------------------------------------------------------------
-    // OPERATIONS
-    // -------------------------------------------------------------------------
     private void chargeOperations() {
         if (operationService.count() != 0) return;
 
@@ -314,6 +321,14 @@ public class Init implements CommandLineRunner {
         nourrissageBeta.addAnimal(trike);
         nourrissageBeta.addPersonnel(ellie);
 
+        soinsRaptor.setMatricule(generateMatricule());
+        transfertRex.setMatricule(generateMatricule());
+        nourrissageBeta.setMatricule(generateMatricule());
+
         List.of(soinsRaptor, transfertRex, nourrissageBeta).forEach(operationService::create);
+    }
+
+    private String generateMatricule() {
+        return String.format("%010d", new Random().nextLong(10_000_000_000L));
     }
 }
