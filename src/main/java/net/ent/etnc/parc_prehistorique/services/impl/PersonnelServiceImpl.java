@@ -14,4 +14,9 @@ public class PersonnelServiceImpl extends AbstractService<Personnel, PersonnelRe
     public PersonnelServiceImpl(PersonnelRepository repository) {
         super(repository);
     }
+
+    @Override
+    public Personnel findByNom(String nom) {
+        return repository.findByNom(nom);
+    }
 }

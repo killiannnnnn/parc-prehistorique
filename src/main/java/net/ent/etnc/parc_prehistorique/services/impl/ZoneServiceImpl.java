@@ -14,4 +14,9 @@ public class ZoneServiceImpl extends AbstractService<Zone, ZoneRepository> imple
     public ZoneServiceImpl(ZoneRepository repository) {
         super(repository);
     }
+
+    @Override
+    public Zone findByNom(String nom) {
+        return repository.findByNom(nom);
+    }
 }

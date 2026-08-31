@@ -49,10 +49,14 @@ public class Operation extends AbstractPersistableWithIdSetter<Long> {
     @Column(name = "fin", nullable = false)
     private LocalDateTime fin;
 
+    @Getter
+    @Setter
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "zone_initiale_id")
     private Zone zoneInitiale;
 
+    @Getter
+    @Setter
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "zone_arrivee_id")
     private Zone zoneArrivee;

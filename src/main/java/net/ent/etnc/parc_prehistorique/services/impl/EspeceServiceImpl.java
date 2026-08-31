@@ -14,4 +14,9 @@ public class EspeceServiceImpl extends AbstractService<Espece, EspeceRepository>
     public EspeceServiceImpl(EspeceRepository repository) {
         super(repository);
     }
+
+    @Override
+    public Espece findByNom(String nom) {
+        return repository.findByNom(nom);
+    }
 }

@@ -14,4 +14,9 @@ public class AnimalServiceImpl extends AbstractService<Animal, AnimalRepository>
     public AnimalServiceImpl(AnimalRepository repository) {
         super(repository);
     }
+
+    @Override
+    public Animal findByNom(String nom) {
+        return repository.findByNom(nom);
+    }
 }
