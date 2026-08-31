@@ -13,6 +13,7 @@ public class ZoneAssembler {
     public ZoneDto toDto(Zone zone) {
         return ZoneDto.builder()
                 .id(zone.getId())
+                .matricule(zone.getMatricule())
                 .nom(zone.getNom())
                 .typeEnclo(zone.getTypeEnclo())
                 .capaciteMax(zone.getCapaciteMax())
@@ -24,6 +25,7 @@ public class ZoneAssembler {
     public Zone toEntity(ZoneDto zoneDto) {
         Zone zone = new Zone();
         zone.setId(zoneDto.getId());
+        zone.setMatricule(zoneDto.getMatricule());
         zone.setNom(zoneDto.getNom());
         zone.setTypeEnclo(zoneDto.getTypeEnclo());
         zone.setCapaciteMax(zoneDto.getCapaciteMax());

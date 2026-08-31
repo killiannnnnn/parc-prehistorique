@@ -26,6 +26,7 @@ public class OperationAssembler {
 
         return OperationDto.builder()
                 .id(operation.getId())
+                .matricule(operation.getMatricule())
                 .etatIntervention(operation.getEtatIntervention())
                 .typeIntervention(operation.getTypeIntervention())
                 .debut(operation.getDebut())
@@ -41,6 +42,7 @@ public class OperationAssembler {
     public Operation toEntity(OperationDto operationDto) {
         Operation operation = new Operation();
         operation.setId(operationDto.getId());
+        operation.setMatricule(operationDto.getMatricule());
         operation.setEtatIntervention(operationDto.getEtatIntervention());
         operation.setTypeIntervention(operationDto.getTypeIntervention());
         operation.setDebut(operationDto.getDebut());

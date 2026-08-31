@@ -24,6 +24,7 @@ public class EspeceAssembler {
 
         return EspeceDto.builder()
                 .id(espece.getId())
+                .matricule(espece.getMatricule())
                 .nom(espece.getNom())
                 .typeEspece(espece.getTypeEspece())
                 .dangerosite(espece.getDangerosite())
@@ -37,6 +38,7 @@ public class EspeceAssembler {
     public Espece toEntity(EspeceDto especeDto) {
         Espece espece = new Espece();
         espece.setId(especeDto.getId());
+        espece.setMatricule(especeDto.getMatricule());
         espece.setNom(especeDto.getNom());
         espece.setTypeEspece(especeDto.getTypeEspece());
         espece.setDangerosite(especeDto.getDangerosite());

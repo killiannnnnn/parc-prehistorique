@@ -15,6 +15,7 @@ import java.util.Set;
 public class OperationDto {
     // request + response DTO
     private Long id;
+    private String matricule;
     private EtatIntervention etatIntervention;
     private TypeIntervention typeIntervention;
     private LocalDateTime debut;

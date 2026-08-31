@@ -12,6 +12,7 @@ import net.ent.etnc.parc_prehistorique.models.enums.TypeEnclo;
 public class ZoneDto {
     // request + response DTO
     private Long id;
+    private String matricule;
     private String nom;
     private TypeEnclo typeEnclo;
     private int capaciteMax;

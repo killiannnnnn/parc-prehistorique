@@ -13,6 +13,7 @@ import java.util.Set;
 public class PersonnelDto {
     // request + response DTO
     private Long id;
+    private String matricule;
     private String prenom;
     private String nom;
     private Habilitation habilitation;

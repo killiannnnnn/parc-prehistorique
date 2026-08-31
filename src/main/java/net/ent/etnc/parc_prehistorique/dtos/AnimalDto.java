@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 public class AnimalDto {
     // request + response DTO
     private Long id;
+    private String matricule;
     private String nom;
     private Long especeId;
     private Long zoneId;

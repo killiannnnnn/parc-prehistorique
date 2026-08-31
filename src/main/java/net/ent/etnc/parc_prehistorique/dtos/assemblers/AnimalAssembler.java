@@ -16,6 +16,7 @@ public class AnimalAssembler {
     public AnimalDto toDto(Animal animal) {
         return AnimalDto.builder()
                 .id(animal.getId())
+                .matricule(animal.getMatricule())
                 .nom(animal.getNom())
                 .especeId(animal.getEspece() != null ? animal.getEspece().getId() : null)
                 .zoneId(animal.getZone() != null ? animal.getZone().getId() : null)
@@ -30,6 +31,7 @@ public class AnimalAssembler {
     public Animal toEntity(AnimalDto animalDto) {
         Animal animal = new Animal();
         animal.setId(animalDto.getId());
+        animal.setMatricule(animalDto.getMatricule());
         animal.setNom(animalDto.getNom());
 
         if (animalDto.getEspeceId() != null) {

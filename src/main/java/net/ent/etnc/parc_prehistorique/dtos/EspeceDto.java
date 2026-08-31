@@ -16,6 +16,7 @@ import java.util.Set;
 public class EspeceDto {
     // request + response DTO
     private Long id;
+    private String matricule;
     private String nom;
     private TypeEspece typeEspece;
     private Dangerosite dangerosite;

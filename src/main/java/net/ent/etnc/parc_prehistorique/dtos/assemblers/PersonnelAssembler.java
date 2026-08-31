@@ -20,6 +20,7 @@ public class PersonnelAssembler {
 
         return PersonnelDto.builder()
                 .id(personnel.getId())
+                .matricule(personnel.getMatricule())
                 .prenom(personnel.getPrenom())
                 .nom(personnel.getNom())
                 .habilitation(personnel.getHabilitation())
@@ -30,6 +31,7 @@ public class PersonnelAssembler {
     public Personnel toEntity(PersonnelDto personnelDto) {
         Personnel personnel = new Personnel();
         personnel.setId(personnelDto.getId());
+        personnel.setMatricule(personnelDto.getMatricule());
         personnel.setPrenom(personnelDto.getPrenom());
         personnel.setNom(personnelDto.getNom());
         personnel.setHabilitation(personnelDto.getHabilitation());
