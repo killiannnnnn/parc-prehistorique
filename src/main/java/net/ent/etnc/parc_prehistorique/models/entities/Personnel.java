@@ -3,6 +3,7 @@ package net.ent.etnc.parc_prehistorique.models.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,11 +17,22 @@ import java.util.Set;
 
 @Entity
 @Table(
-        name = "personnels"
+        name = "personnels",
+        uniqueConstraints = @UniqueConstraint(
+                name = "personnels__matricule__uk",
+                columnNames = {"matricule"}
+        )
 )
 @ToString(of = {"prenom", "nom", "habilitation"}, callSuper = true)
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = false, of = {"matricule"})
 public class Personnel extends AbstractPersistableWithIdSetter<Long> {
+
+    @Getter
+    @Setter
+    @NotBlank
+    @Pattern(regexp = "^\\d{10}$")
+    @Column(name = "matricule", nullable = false, length = 10)
+    private String matricule;
 
     @Getter
     @Setter

@@ -1,10 +1,7 @@
 package net.ent.etnc.parc_prehistorique.models.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,11 +12,22 @@ import net.ent.etnc.parc_prehistorique.models.enums.TypeEnclo;
 
 @Entity
 @Table(
-        name = "zones"
+        name = "zones",
+        uniqueConstraints = @UniqueConstraint(
+                name = "zones__matricule__uk",
+                columnNames = {"matricule"}
+        )
 )
 @ToString(of = {"nom", "typeEnclo", "capaciteMax", "etatEnclo", "description"}, callSuper = true)
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = false, of = {"matricule"})
 public class Zone extends AbstractPersistableWithIdSetter<Long> {
+
+    @Getter
+    @Setter
+    @NotBlank
+    @Pattern(regexp = "^\\d{10}$")
+    @Column(name = "matricule", nullable = false, length = 10)
+    private String matricule;
 
     @Getter
     @Setter
