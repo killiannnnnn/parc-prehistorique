@@ -46,7 +46,7 @@ public class Zone extends AbstractPersistableWithIdSetter<Long> {
     @Setter
     @NotNull
     @Positive
-    @Max(20)
+    @Max(1000)
     @Column(name = "capacite_max", nullable = false)
     private Integer capaciteMax;
 
