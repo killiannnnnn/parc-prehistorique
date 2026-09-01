@@ -70,9 +70,7 @@ public class OperationServiceImpl extends AbstractService<Operation, OperationRe
                     throw new ServiceException("Le soigneur " + personnel.getNom() + " n'est pas habilité sur l'espèce " + espece.getNom());
                 }
 
-                if (personnel.getHabilitation().compareTo(
-                        espece.getHabilitationMinimale()
-                ) < 0) {
+                if (personnel.getHabilitation().compareTo(espece.getHabilitationMinimale()) < 0) {
                     throw new ServiceException("Habilitation du soigneur " + personnel.getNom() + " insuffisante pour l'espèce " + espece.getNom());
                 }
             }
