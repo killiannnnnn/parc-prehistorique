@@ -58,8 +58,8 @@ public class Animal extends AbstractPersistableWithIdSetter<Long> {
     @Getter
     @Setter
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "zone_id", nullable = true, foreignKey = @ForeignKey(name = "fk__animal__zone"))
-    private Zone zone; // VERIFIE COMPATIBILITE AVEC LA ZONE
+    @JoinColumn(name = "zone_id", nullable = false, foreignKey = @ForeignKey(name = "fk__animal__zone"))
+    private Zone zone;
 
     @Getter
     @Setter
