@@ -14,6 +14,10 @@ import java.util.Random;
 @Component
 public class Init implements CommandLineRunner {
 
+    // list for javafaker
+    private final Faker faker = new Faker();
+//    private final List<String> nomEspeces = List.of("Tyrannosaurus Rex", "Velociraptor", "Triceratops", "Brachiosaurus")
+
     private final ZoneService zoneService;
     private final EspeceService especeService;
     private final AnimalService animalService;
@@ -47,7 +51,7 @@ public class Init implements CommandLineRunner {
 
         Zone zone1 = new Zone();
         zone1.setNom("Sector Alpha");
-        zone1.setCapaciteMax(5);
+        zone1.setCapaciteMax(500);
         zone1.setEncloSecurite(EncloSecurite.MAXIMUM);
         zone1.setEtatEnclo(EtatEnclo.ACTIF);
         zone1.setDescription("Enclos haute sécurité carnivores");
@@ -213,6 +217,20 @@ public class Init implements CommandLineRunner {
         rex.setSexe(Sexe.FEMELLE);
         rex.setRegimeAlimentaire(RegimeAlimentaire.CARNIVORE);
         rex.setDateNaissance(LocalDateTime.of(2018, 3, 14, 8, 0));
+
+        if (this.animalService.count() == 0){
+            for (int i = 0; i < 50; i++){
+                Animal animal = new Animal();
+                rex.setNom(faker.name().lastName());
+                animal.setEspece(tRex);
+                animal.setZone(zoneAlpha);
+                animal.setSante(Sante.EN_BONNE_SANTE);
+                animal.setSexe(Sexe.FEMELLE);
+                animal.setRegimeAlimentaire(RegimeAlimentaire.CARNIVORE);
+                animal.setDateNaissance(faker.date().birthday(1,30).toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate());
+                this.animalService.create(animal);
+            }
+        }
 
         // Velociraptors (meute de 3)
         Animal raptor1 = new Animal();
