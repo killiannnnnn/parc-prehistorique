@@ -1,5 +1,6 @@
 package net.ent.etnc.parc_prehistorique.init;
 
+import com.github.javafaker.Faker;
 import net.ent.etnc.parc_prehistorique.models.entities.*;
 import net.ent.etnc.parc_prehistorique.models.enums.*;
 import net.ent.etnc.parc_prehistorique.services.*;
@@ -16,7 +17,7 @@ public class Init implements CommandLineRunner {
 
     // list for javafaker
     private final Faker faker = new Faker();
-//    private final List<String> nomEspeces = List.of("Tyrannosaurus Rex", "Velociraptor", "Triceratops", "Brachiosaurus")
+//  private final List<String> nomEspeces = List.of("Tyrannosaurus Rex", "Velociraptor", "Triceratops", "Brachiosaurus")
 
     private final ZoneService zoneService;
     private final EspeceService especeService;
@@ -218,18 +219,17 @@ public class Init implements CommandLineRunner {
         rex.setRegimeAlimentaire(RegimeAlimentaire.CARNIVORE);
         rex.setDateNaissance(LocalDateTime.of(2018, 3, 14, 8, 0));
 
-        if (this.animalService.count() == 0){
-            for (int i = 0; i < 50; i++){
-                Animal animal = new Animal();
-                rex.setNom(faker.name().lastName());
-                animal.setEspece(tRex);
-                animal.setZone(zoneAlpha);
-                animal.setSante(Sante.EN_BONNE_SANTE);
-                animal.setSexe(Sexe.FEMELLE);
-                animal.setRegimeAlimentaire(RegimeAlimentaire.CARNIVORE);
-                animal.setDateNaissance(faker.date().birthday(1,30).toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate());
-                this.animalService.create(animal);
-            }
+        for (int i = 0; i < 50; i++){
+            Animal animal = new Animal();
+            animal.setNom(faker.name().lastName());
+            animal.setMatricule(generateMatricule());
+            animal.setEspece(tRex);
+            animal.setZone(zoneAlpha);
+            animal.setSante(Sante.EN_BONNE_SANTE);
+            animal.setSexe(faker.random().nextBoolean() ? Sexe.MALE : Sexe.FEMELLE);
+            animal.setRegimeAlimentaire(RegimeAlimentaire.CARNIVORE);
+            animal.setDateNaissance(faker.date().birthday(1,30).toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDateTime());
+            this.animalService.create(animal);
         }
 
         // Velociraptors (meute de 3)
@@ -347,6 +347,6 @@ public class Init implements CommandLineRunner {
     }
 
     private String generateMatricule() {
-        return String.format("%010d", new Random().nextLong(10_000_000_000L));
+        return faker.number().digits(10);
     }
 }
