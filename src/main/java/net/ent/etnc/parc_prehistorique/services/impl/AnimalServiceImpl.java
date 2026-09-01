@@ -3,9 +3,9 @@ package net.ent.etnc.parc_prehistorique.services.impl;
 import net.ent.etnc.parc_prehistorique.models.entities.Animal;
 import net.ent.etnc.parc_prehistorique.models.entities.Zone;
 import net.ent.etnc.parc_prehistorique.models.enums.Dangerosite;
+import net.ent.etnc.parc_prehistorique.models.enums.EncloSecurite;
 import net.ent.etnc.parc_prehistorique.models.enums.EtatEnclo;
 import net.ent.etnc.parc_prehistorique.models.enums.Sante;
-import net.ent.etnc.parc_prehistorique.models.enums.TypeEnclo;
 import net.ent.etnc.parc_prehistorique.repositories.AnimalRepository;
 import net.ent.etnc.parc_prehistorique.repositories.OperationRepository;
 import net.ent.etnc.parc_prehistorique.services.AnimalService;
@@ -106,13 +106,13 @@ public class AnimalServiceImpl extends AbstractService<Animal, AnimalRepository>
     private void validerSecurite(Animal animal, Zone zone) {
         Dangerosite dangerosite = animal.getEspece().getDangerosite();
 
-        TypeEnclo securiteMinimale = switch (dangerosite) {
-            case FAIBLE, MODERE -> TypeEnclo.STANDARD;
-            case ELEVE -> TypeEnclo.RENFORCE;
-            case CRITIQUE -> TypeEnclo.MAXIMUM;
+        EncloSecurite securiteMinimale = switch (dangerosite) {
+            case FAIBLE, MODERE -> EncloSecurite.STANDARD;
+            case ELEVE -> EncloSecurite.RENFORCE;
+            case CRITIQUE -> EncloSecurite.MAXIMUM;
         };
 
-        if (zone.getTypeEnclo().ordinal() < securiteMinimale.ordinal()) {
+        if (zone.getEncloSecurite().ordinal() < securiteMinimale.ordinal()) {
             throw new ServiceException("Le niveau de sécurité de la zone est insuffisant pour cette espèce");
         }
     }

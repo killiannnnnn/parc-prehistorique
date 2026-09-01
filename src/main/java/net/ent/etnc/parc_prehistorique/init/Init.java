@@ -48,28 +48,28 @@ public class Init implements CommandLineRunner {
         Zone zone1 = new Zone();
         zone1.setNom("Sector Alpha");
         zone1.setCapaciteMax(5);
-        zone1.setTypeEnclo(TypeEnclo.MAXIMUM);
+        zone1.setEncloSecurite(EncloSecurite.MAXIMUM);
         zone1.setEtatEnclo(EtatEnclo.ACTIF);
         zone1.setDescription("Enclos haute sécurité carnivores");
 
         Zone zone2 = new Zone();
         zone2.setNom("Sector Beta");
         zone2.setCapaciteMax(10);
-        zone2.setTypeEnclo(TypeEnclo.STANDARD);
+        zone2.setEncloSecurite(EncloSecurite.STANDARD);
         zone2.setEtatEnclo(EtatEnclo.ACTIF);
         zone2.setDescription("Zone ouverte pour herbivores");
 
         Zone zone3 = new Zone();
         zone3.setNom("Sector Gamma");
         zone3.setCapaciteMax(8);
-        zone3.setTypeEnclo(TypeEnclo.STANDARD);
+        zone3.setEncloSecurite(EncloSecurite.STANDARD);
         zone3.setEtatEnclo(EtatEnclo.MAINTENANCE);
         zone3.setDescription("Zone aquatique en cours de rénovation");
 
         Zone zone4 = new Zone();
         zone4.setNom("Sector Delta");
         zone4.setCapaciteMax(3);
-        zone4.setTypeEnclo(TypeEnclo.MAXIMUM);
+        zone4.setEncloSecurite(EncloSecurite.MAXIMUM);
         zone4.setEtatEnclo(EtatEnclo.ACTIF);
         zone4.setDescription("Enclos isolé pour espèces dangereuses");
 
@@ -296,7 +296,6 @@ public class Init implements CommandLineRunner {
         soinsRaptor.setZoneInitiale(zoneDelta);
         soinsRaptor.setNotes("Traitement antibiotique pour infection respiratoire de Delta");
         soinsRaptor.addAnimal(raptor2);
-        soinsRaptor.addPersonnel(henry);
         soinsRaptor.addPersonnel(alan);
 
         // Opération 2 : Transfert de Rex depuis Alpha vers Delta
@@ -310,7 +309,6 @@ public class Init implements CommandLineRunner {
         transfertRex.setNotes("Transfert pour travaux de renforcement de l'enclos Alpha");
         transfertRex.addAnimal(rex);
         transfertRex.addPersonnel(alan);
-        transfertRex.addPersonnel(henry);
 
         // Opération 3 : Nourrissage herbivores
         Operation nourrissageBeta = new Operation();
@@ -321,7 +319,7 @@ public class Init implements CommandLineRunner {
         nourrissageBeta.setZoneInitiale(zoneBeta);
         nourrissageBeta.setNotes("Nourrissage quotidien zone Beta — ration d'automne");
         nourrissageBeta.addAnimal(trike);
-        nourrissageBeta.addPersonnel(ellie);
+        nourrissageBeta.addPersonnel(henry);
 
         soinsRaptor.setMatricule(generateMatricule());
         transfertRex.setMatricule(generateMatricule());
