@@ -7,8 +7,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import net.ent.etnc.parc_prehistorique.models.commons.AbstractPersistableWithIdSetter;
+import net.ent.etnc.parc_prehistorique.models.enums.EncloSecurite;
 import net.ent.etnc.parc_prehistorique.models.enums.EtatEnclo;
-import net.ent.etnc.parc_prehistorique.models.enums.TypeEnclo;
 
 @Entity
 @Table(
@@ -18,7 +18,7 @@ import net.ent.etnc.parc_prehistorique.models.enums.TypeEnclo;
                 columnNames = {"matricule"}
         )
 )
-@ToString(of = {"nom", "typeEnclo", "capaciteMax", "etatEnclo", "description"}, callSuper = true)
+@ToString(of = {"nom", "encloSecurite", "capaciteMax", "etatEnclo", "description"}, callSuper = true)
 @EqualsAndHashCode(callSuper = false, of = {"matricule"})
 public class Zone extends AbstractPersistableWithIdSetter<Long> {
 
@@ -39,8 +39,8 @@ public class Zone extends AbstractPersistableWithIdSetter<Long> {
     @Setter
     @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "type_enclo", nullable = false)
-    private TypeEnclo typeEnclo;
+    @Column(name = "enclo_securite", nullable = false)
+    private EncloSecurite encloSecurite;
 
     @Getter
     @Setter

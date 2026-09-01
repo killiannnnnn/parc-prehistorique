@@ -15,7 +15,7 @@ public class ZoneAssembler {
                 .id(zone.getId())
                 .matricule(zone.getMatricule())
                 .nom(zone.getNom())
-                .typeEnclo(zone.getTypeEnclo())
+                .encloSecurite(zone.getEncloSecurite())
                 .capaciteMax(zone.getCapaciteMax())
                 .etatEnclo(zone.getEtatEnclo())
                 .description(zone.getDescription())
@@ -27,7 +27,7 @@ public class ZoneAssembler {
         zone.setId(zoneDto.getId());
         zone.setMatricule(zoneDto.getMatricule());
         zone.setNom(zoneDto.getNom());
-        zone.setTypeEnclo(zoneDto.getTypeEnclo());
+        zone.setEncloSecurite(zoneDto.getEncloSecurite());
         zone.setCapaciteMax(zoneDto.getCapaciteMax());
         zone.setEtatEnclo(zoneDto.getEtatEnclo());
         zone.setDescription(zoneDto.getDescription());
